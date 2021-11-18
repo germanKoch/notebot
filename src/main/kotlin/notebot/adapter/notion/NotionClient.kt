@@ -1,21 +1,20 @@
 package notebot.adapter.notion
 
+import notebot.domain.Subscription
 import org.jraf.klibnotion.client.Authentication
 import org.jraf.klibnotion.client.ClientConfiguration
 import org.jraf.klibnotion.client.NotionClient
 
-//"secret_pNmklWWxdt0PyJAz1ArpbU5KqhzBmI93W4Lkcc0PKY7"
-//"6103591ef5924b448a177b0a9497d165"
+class NotionClient {
 
-class NotionClient(accessToken: String, private val pageId: String) {
-
-    private val notionClient: NotionClient = NotionClient.newInstance(
-        ClientConfiguration(Authentication(accessToken))
-    )
-
-    fun addNote(text: String) {
+    fun addNote(subscription: Subscription, text: String) {
+            if (subscription.notionAccessKey != null && subscription.notionPageId != null) {
+                val notionClient =
+                    NotionClient.newInstance(ClientConfiguration(Authentication(subscription.notionAccessKey)))
         suspend {
-            notionClient.blocks.appendBlockList(pageId) { bullet(text) }
+                notionClient.blocks.appendBlockList(subscription.notionPageId) { bullet(text) }
+                print("aaa")
+            }
         }
     }
 

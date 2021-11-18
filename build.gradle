@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.5.21'
+    id "org.flywaydb.flyway" version "8.0.5"
 }
 
 group = 'me.germi'
@@ -13,7 +14,8 @@ repositories {
 dependencies {
     implementation(
             'org.jraf:klibnotion:1.9.0',
-            'io.github.kotlin-telegram-bot.kotlin-telegram-bot:telegram:6.0.6'
+            'io.github.kotlin-telegram-bot.kotlin-telegram-bot:telegram:6.0.6',
+            'org.postgresql:postgresql:42.3.1'
     )
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
@@ -28,4 +30,11 @@ compileKotlin {
 
 compileTestKotlin {
     kotlinOptions.jvmTarget = '11'
+}
+
+flywayMigrate {
+    driver = "org.postgresql.Driver"
+    url = "jdbc:postgresql://localhost:5432/notebot"
+    user = "postgres"
+    password = "postgres"
 }
