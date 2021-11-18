@@ -9,6 +9,7 @@ class RegisterUseCase(
 ) {
 
     fun start(chatId: Long) {
+        subsClient.delete(chatId)
         subsClient.save(
             Subscription(
                 chatId = chatId,

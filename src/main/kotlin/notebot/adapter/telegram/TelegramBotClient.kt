@@ -19,6 +19,13 @@ class TelegramBotClient(
     private val bot: Bot = telegramBot {
         this.token = token
         dispatch {
+            command("start") {
+                registerUseCase.start(message.chat.id)
+                bot.sendMessage(
+                    ChatId.fromId(message.chat.id),
+                    "Привет. Введи токен ноушена"
+                )
+            }
             message(Custom {
                 noteUseCase.note(chat.id, text ?: "")
             }) {
@@ -38,13 +45,6 @@ class TelegramBotClient(
                 bot.sendMessage(
                     ChatId.fromId(message.chat.id),
                     "Отлично. Теперь введи идентификатор страницы"
-                )
-            }
-            command("start") {
-                registerUseCase.start(message.chat.id)
-                bot.sendMessage(
-                    ChatId.fromId(message.chat.id),
-                    "Привет. Введи токен ноушена"
                 )
             }
         }
