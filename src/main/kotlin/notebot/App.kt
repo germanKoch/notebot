@@ -1,6 +1,6 @@
 package notebot
 
-import notebot.adapter.notion.NotionClient
+import notebot.adapter.notion.NotionClientAdapter
 import notebot.adapter.repository.SubsPostgresClient
 import notebot.adapter.telegram.TelegramBotClient
 import notebot.usecase.NoteUseCase
@@ -15,7 +15,7 @@ import notebot.usecase.RegisterUseCase
 
 fun main() {
     val subsClient = SubsPostgresClient("jdbc:postgresql://localhost:5432/notebot", "postgres", "postgres")
-    val notionClient = NotionClient()
+    val notionClient = NotionClientAdapter()
     val noteCase = NoteUseCase(notionClient, subsClient)
     val registerCase = RegisterUseCase(subsClient)
     val telegramBotClient = TelegramBotClient(registerCase, noteCase, "2142829347:AAEtMADR5XEex2FLMqCOrX2zUWLaSypi8K8")

@@ -1,11 +1,11 @@
 package notebot.usecase
 
-import notebot.adapter.notion.NotionClient
+import notebot.adapter.notion.NotionClientAdapter
 import notebot.adapter.repository.SubsPostgresClient
 import notebot.domain.enums.Status
 
 class NoteUseCase(
-    private val notionClient: NotionClient,
+    private val notionClient: NotionClientAdapter,
     private val subsClient: SubsPostgresClient
 ) {
 
