@@ -9,13 +9,10 @@ class RegisterUseCase(
 ) {
 
     fun start(chatId: Long) {
-        subsClient.delete(chatId)
-        subsClient.save(
-            Subscription(
-                chatId = chatId,
-                status = Status.NOTION_KEY_REQUESTED
-            )
-        )
+        subsClient.execute {
+            delete(chatId)
+            save(Subscription(chatId = chatId, status = Status.NOTION_KEY_REQUESTED))
+        }
     }
 
     fun setNotionKey(chatId: Long, notionKey: String): Boolean {

@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory
 
 class NotionClientAdapter {
 
-    private val log: Logger = LoggerFactory.getLogger(NotionClientAdapter::class.java)
-
     fun addNote(subscription: Subscription, text: String) {
         if (subscription.notionAccessKey != null && subscription.notionPageId != null) {
             val client = NotionClient(token = subscription.notionAccessKey)
