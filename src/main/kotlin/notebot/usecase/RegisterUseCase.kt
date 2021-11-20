@@ -8,10 +8,17 @@ class RegisterUseCase(
     private val subsClient: SubsPostgresClient
 ) {
 
-    fun start(chatId: Long) {
+    fun save(chatId: Long) {
         subsClient.execute {
             delete(chatId)
             save(Subscription(chatId = chatId, status = Status.NOTION_KEY_REQUESTED))
+        }
+    }
+
+    fun register(subs: Subscription) {
+        subsClient.execute {
+            delete(subs.chatId)
+            save(subs)
         }
     }
 
