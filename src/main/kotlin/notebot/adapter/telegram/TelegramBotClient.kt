@@ -25,15 +25,6 @@ class TelegramBotClient(
     private val bot: Bot = telegramBot {
         this.token = token
         dispatch {
-            command("start") {
-                safeCall(message) {
-                    registerUseCase.start(message.chat.id)
-                    bot.sendMessage(
-                        ChatId.fromId(message.chat.id),
-                        "Привет. Введи токен ноушена"
-                    )
-                }
-            }
             message(Custom {
                 registerUseCase.setPageId(chat.id, text ?: "")
             }) {
@@ -61,7 +52,15 @@ class TelegramBotClient(
                     bot.sendMessage(ChatId.fromId(message.chat.id), message.text ?: "")
                 }
             }
-
+            command("start") {
+                safeCall(message) {
+                    registerUseCase.start(message.chat.id)
+                    bot.sendMessage(
+                        ChatId.fromId(message.chat.id),
+                        "Привет. Введи токен ноушена"
+                    )
+                }
+            }
         }
     }
 
