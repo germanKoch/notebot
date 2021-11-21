@@ -16,6 +16,7 @@ dependencies {
             'com.github.seratch:notion-sdk-jvm-core:0.1.18',
             'dev.inmo:tgbotapi:0.37.1',
             'dev.inmo:tgbotapi.extensions.behaviour_builder:0.37.1',
+            "dev.inmo:tgbotapi.extensions.api:0.37.1",
             'org.postgresql:postgresql:42.3.1',
             'ch.qos.logback:logback-classic:1.2.3',
             'org.slf4j:slf4j-api:1.7.26'
